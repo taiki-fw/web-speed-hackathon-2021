@@ -20,7 +20,7 @@ const config = {
     },
     static: [PUBLIC_PATH, UPLOAD_PATH],
   },
-  devtool: 'inline-source-map',
+  devtool: process.env.NODE_ENV === 'production' ? false : 'inline-source-map',
   entry: {
     main: [
       'jquery-binarytransport',
@@ -68,7 +68,7 @@ const config = {
       filename: 'styles/[name].css',
     }),
     new HtmlWebpackPlugin({
-      inject: false,
+      inject: 'body',
       template: path.resolve(SRC_PATH, './index.html'),
     }),
   ],
