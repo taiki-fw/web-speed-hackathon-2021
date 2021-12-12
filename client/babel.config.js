@@ -4,7 +4,10 @@ module.exports = {
       '@babel/preset-env',
       {
         corejs: '3',
-        useBuiltIns: false,
+        useBuiltIns: 'usage',
+        targets: {
+          browsers: ['chrome >= 95'],
+        },
       },
     ],
     ['@babel/preset-react'],
