@@ -7,11 +7,6 @@ module.exports = {
         useBuiltIns: false,
       },
     ],
-    [
-      '@babel/preset-react',
-      {
-        development: true,
-      },
-    ],
+    ['@babel/preset-react'],
   ],
 };
