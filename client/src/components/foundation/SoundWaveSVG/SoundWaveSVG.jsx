@@ -1,4 +1,4 @@
-import { map as _map, zip as _zip, chunk as _chunk, max as _max } from 'lodash-es';
+import { map as _map, zip as _zip, mean as _mean, chunk as _chunk, max as _max } from 'lodash-es';
 import React from 'react';
 
 /**
@@ -19,11 +19,11 @@ async function calculate(data) {
   const rightData = _map(buffer.getChannelData(1), Math.abs);
 
   // 左右の音声データの平均を取る
-  const normalized = _map(_zip(leftData, rightData), _.mean);
+  const normalized = _map(_zip(leftData, rightData), _mean);
   // 100 個の chunk に分ける
   const chunks = _chunk(normalized, Math.ceil(normalized.length / 100));
   // chunk ごとに平均を取る
-  const peaks = _map(chunks, _.mean);
+  const peaks = _map(chunks, _mean);
   // chunk の平均の中から最大値を取る
   const max = _max(peaks);
 
