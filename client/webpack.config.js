@@ -51,6 +51,17 @@ const config = {
     path: DIST_PATH,
     publicPath: '/',
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   plugins: [
     new webpack.ProvidePlugin({
       AudioContext: ['standardized-audio-context', 'AudioContext'],
