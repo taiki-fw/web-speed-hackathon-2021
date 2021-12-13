@@ -50,6 +50,7 @@ const config = {
   output: {
     filename: 'scripts/[name].js',
     path: DIST_PATH,
+    publicPath: '/',
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -68,7 +69,7 @@ const config = {
       filename: 'styles/[name].css',
     }),
     new HtmlWebpackPlugin({
-      inject: 'body',
+      inject: true,
       template: path.resolve(SRC_PATH, './index.html'),
     }),
   ],
