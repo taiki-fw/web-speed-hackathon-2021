@@ -1,10 +1,6 @@
 import classNames from 'classnames';
-import { Animator, Decoder } from 'gifler';
-import { GifReader } from 'omggif';
 import React from 'react';
 
-import { useFetch } from '../../../hooks/use_fetch';
-import { fetchBinary } from '../../../utils/fetchers';
 import { AspectRatioBox } from '../AspectRatioBox';
 import { FontAwesomeIcon } from '../FontAwesomeIcon';
 
