@@ -77,7 +77,7 @@ const config = {
       filename: 'styles/[name].css',
     }),
     new HtmlWebpackPlugin({
-      inject: true,
+      inject: 'body',
       template: path.resolve(SRC_PATH, './index.html'),
     }),
   ],
