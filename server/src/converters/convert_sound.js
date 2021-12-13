@@ -7,7 +7,7 @@ import { ffmpeg } from '../ffmpeg';
  * @returns {Promise<Uint8Array>}
  */
 async function convertSound(buffer, options) {
-  const exportFile = `export.${options.extension ?? 'mp3'}`;
+  const exportFile = `export.${options.extension ?? 'opus'}`;
 
   if (ffmpeg.isLoaded() === false) {
     await ffmpeg.load();
