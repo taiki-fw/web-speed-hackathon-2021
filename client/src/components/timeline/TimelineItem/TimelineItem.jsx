@@ -1,5 +1,5 @@
-import moment from 'moment';
-import React from 'react';
+import dayjs from 'dayjs'
+import React, { useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { getProfileImagePath } from '../../../utils/get_path';
@@ -34,6 +34,15 @@ const isClickedAnchorOrButton = (target, currentTarget) => {
 /** @type {React.VFC<Props>} */
 const TimelineItem = ({ post }) => {
   const navigate = useNavigate();
+
+  const { dateTime, displayTime } = useMemo(() => {
+    const createdAt = dayjs(post.createdAt)
+
+    return {
+      dateTime: createdAt.toISOString(),
+      displayTime: createdAt.format('YYYY年M月D日')
+    }
+  }, [post.createdAt])
 
   /**
    * ボタンやリンク以外の箇所をクリックしたとき かつ 文字が選択されてないとき、投稿詳細ページに遷移する
@@ -70,8 +79,8 @@ const TimelineItem = ({ post }) => {
             </Link>
             <span className="pr-1 text-gray-500">-</span>
             <Link className="pr-1 text-gray-500 hover:underline" to={`/posts/${post.id}`}>
-              <time dateTime={moment(post.createdAt).toISOString()}>
-                {moment(post.createdAt).locale('ja').format('LL')}
+              <time dateTime={dateTime}>
+                {displayTime}
               </time>
             </Link>
           </p>

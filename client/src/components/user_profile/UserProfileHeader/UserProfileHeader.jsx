@@ -1,6 +1,6 @@
 import FastAverageColor from 'fast-average-color';
-import moment from 'moment';
-import React from 'react';
+import dayjs from 'dayjs'
+import React, { useMemo } from 'react';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
@@ -13,6 +13,15 @@ import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 /** @type {React.VFC<Props>} */
 const UserProfileHeader = ({ user }) => {
   const [averageColor, setAverageColor] = React.useState(null);
+
+  const { dateTime, displayTime } = useMemo(() => {
+    const createdAt = dayjs(user.createdAt)
+
+    return {
+      dateTime: createdAt.toISOString(),
+      displayTime: createdAt.format('YYYY年M月D日')
+    }
+  }, [user.createdAt])
 
   // 画像の平均色を取得します
   /** @type {React.ReactEventHandler<HTMLImageElement>} */
@@ -38,8 +47,8 @@ const UserProfileHeader = ({ user }) => {
             <FontAwesomeIcon iconType="calendar-alt" styleType="regular" />
           </span>
           <span>
-            <time dateTime={moment(user.createdAt).toISOString()}>
-              {moment(user.createdAt).locale('ja').format('LL')}
+            <time dateTime={dateTime}>
+              {displayTime}
             </time>
             からサービスを利用しています
           </span>
