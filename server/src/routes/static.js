@@ -27,6 +27,9 @@ router.use(
   serveStatic(CLIENT_DIST_PATH, {
     etag: false,
     lastModified: false,
+    setHeaders: (res) => {
+      res.setHeader('Accept-Encoding', 'gzip');
+    },
   }),
 );
 
