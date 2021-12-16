@@ -1,17 +1,13 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 
 import { NotFoundPage } from '../../components/application/NotFoundPage';
+import { useHeadTitle } from '../../hooks/useHeadTitle';
 
 /** @type {React.VFC} */
 const NotFoundContainer = () => {
+  useHeadTitle('ページが見つかりません - CAwitter')
   return (
-    <>
-      <Helmet>
-        <title>ページが見つかりません - CAwitter</title>
-      </Helmet>
-      <NotFoundPage />
-    </>
+    <NotFoundPage />
   );
 };
 
