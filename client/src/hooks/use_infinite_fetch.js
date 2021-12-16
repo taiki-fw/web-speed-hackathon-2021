@@ -28,7 +28,7 @@ export function useInfiniteFetch(apiPath, fetcher) {
 
   const fetchMore = React.useCallback(() => {
     const { isLoading, offset } = internalRef.current;
-    if (isLoading) {
+    if (isLoading || offset % LIMIT !== 0) {
       return;
     }
 
@@ -41,17 +41,17 @@ export function useInfiniteFetch(apiPath, fetcher) {
       offset,
     };
 
-    const promise = fetcher(apiPath);
+    const promise = fetcher(`${apiPath}/?limit=${LIMIT}&offset=${internalRef.current.offset}`);
 
-    promise.then((allData) => {
+    promise.then((data) => {
       setResult((cur) => ({
         ...cur,
-        data: [...cur.data, ...allData.slice(offset, offset + LIMIT)],
+        data: [...cur.data, ...data],
         isLoading: false,
       }));
       internalRef.current = {
         isLoading: false,
-        offset: offset + LIMIT,
+        offset: offset + data.length,
       };
     });
 
