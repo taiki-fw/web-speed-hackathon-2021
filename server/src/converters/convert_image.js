@@ -15,7 +15,10 @@ async function convertImage(buffer, options) {
       height: options.height,
       width: options.width,
     })
-    .toFormat(options.extension ?? 'jpeg')
+    .avif({
+      quality: 60,
+      speed: 0,
+    })
     .toBuffer();
 }
 
