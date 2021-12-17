@@ -1,5 +1,6 @@
 const path = require('path');
 
+const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
@@ -79,6 +80,7 @@ const config = {
       inject: 'body',
       template: path.resolve(SRC_PATH, './index.html'),
     }),
+    ...(process.env.NODE_ENV === 'production' ? [new CompressionPlugin()] : []),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
