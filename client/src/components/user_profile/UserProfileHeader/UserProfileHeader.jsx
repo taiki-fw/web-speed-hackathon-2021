@@ -1,6 +1,6 @@
 import FastAverageColor from 'fast-average-color';
 import dayjs from 'dayjs'
-import React, { useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 import { getProfileImagePath } from '../../../utils/get_path';
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 
 /** @type {React.VFC<Props>} */
 const UserProfileHeader = ({ user }) => {
-  const [averageColor, setAverageColor] = React.useState(null);
+  const [averageColor, setAverageColor] = useState(null);
 
   const { dateTime, displayTime } = useMemo(() => {
     const createdAt = dayjs(user.createdAt)
@@ -25,7 +25,7 @@ const UserProfileHeader = ({ user }) => {
 
   // 画像の平均色を取得します
   /** @type {React.ReactEventHandler<HTMLImageElement>} */
-  const handleLoadImage = React.useCallback((ev) => {
+  const handleLoadImage = useCallback((ev) => {
     const fac = new FastAverageColor();
     const { rgb } = fac.getColor(ev.currentTarget, { mode: 'precision' });
     setAverageColor(rgb);

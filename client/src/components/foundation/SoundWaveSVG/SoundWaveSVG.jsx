@@ -1,5 +1,5 @@
 import { zip as _zip, mean as _mean, chunk as _chunk, max as _max } from 'lodash-es';
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 /**
  * @param {ArrayBuffer} data
@@ -40,10 +40,10 @@ async function calculate(data) {
  * @type {React.VFC<Props>}
  */
 const SoundWaveSVG = ({ soundData }) => {
-  const uniqueIdRef = React.useRef(Math.random().toString(16));
-  const [{ max, peaks }, setPeaks] = React.useState({ max: 0, peaks: [] });
+  const uniqueIdRef = useRef(Math.random().toString(16));
+  const [{ max, peaks }, setPeaks] = useState({ max: 0, peaks: [] });
 
-  React.useEffect(() => {
+  useEffect(() => {
     calculate(soundData).then(({ max, peaks }) => {
       setPeaks({ max, peaks });
     });

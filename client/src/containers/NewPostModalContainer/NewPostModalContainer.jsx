@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Modal } from '../../components/modal/Modal';
@@ -33,14 +33,14 @@ async function sendNewPost({ images, movie, sound, text }) {
 const NewPostModalContainer = ({ onRequestCloseModal }) => {
   const navigate = useNavigate();
 
-  const [hasError, setHasError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleResetError = React.useCallback(() => {
+  const handleResetError = useCallback(() => {
     setHasError(false);
   }, []);
 
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     async (params) => {
       try {
         setIsLoading(true);

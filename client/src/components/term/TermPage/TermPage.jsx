@@ -1,6 +1,3 @@
-import React from 'react';
-
-/** @type {React.VFC} */
 const TermPage = () => {
   return (
     <article className="pb-16 px-2 leading-relaxed md:pt-2 md:px-4">

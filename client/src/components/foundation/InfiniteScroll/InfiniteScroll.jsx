@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 /**
  * @typedef {object} Props
@@ -11,9 +11,9 @@ import React from 'react';
 const InfiniteScroll = ({ children, fetchMore, items }) => {
   const latestItem = items[items.length - 1];
 
-  const prevReachedRef = React.useRef(false);
+  const prevReachedRef = useRef(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = () => {
       const hasReached = window.innerHeight + Math.ceil(window.scrollY) >= document.body.offsetHeight;
 

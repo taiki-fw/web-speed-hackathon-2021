@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback } from 'react';
 
 import { FontAwesomeIcon } from '../../foundation/FontAwesomeIcon';
 import { ModalErrorMessage } from '../../modal/ModalErrorMessage';
@@ -26,12 +26,12 @@ const MAX_UPLOAD_BYTES_LIMIT = 10 * 1024 * 1024;
 /** @type {React.VFC<Props>} */
 const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   /** @type {[SubmitParams, (params: SubmitParams) => SubmitParams]} */
-  const [params, setParams] = React.useState({ images: [], movie: undefined, sound: undefined, text: '' });
+  const [params, setParams] = useState({ images: [], movie: undefined, sound: undefined, text: '' });
 
-  const [hasFileError, setHasFileError] = React.useState(false);
+  const [hasFileError, setHasFileError] = useState(false);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeText = React.useCallback((ev) => {
+  const handleChangeText = useCallback((ev) => {
     const value = ev.currentTarget.value;
     setParams((params) => ({
       ...params,
@@ -40,7 +40,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeImages = React.useCallback((ev) => {
+  const handleChangeImages = useCallback((ev) => {
     const files = Array.from(ev.currentTarget.files).slice(0, 4);
     const isValid = files.every((file) => file.size <= MAX_UPLOAD_BYTES_LIMIT);
 
@@ -56,7 +56,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeSound = React.useCallback((ev) => {
+  const handleChangeSound = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -72,7 +72,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.ChangeEventHandler<HTMLInputElement>} */
-  const handleChangeMovie = React.useCallback((ev) => {
+  const handleChangeMovie = useCallback((ev) => {
     const file = ev.currentTarget.files[0];
     const isValid = file?.size <= MAX_UPLOAD_BYTES_LIMIT;
 
@@ -88,7 +88,7 @@ const NewPostModalPage = ({ hasError, isLoading, onResetError, onSubmit }) => {
   }, []);
 
   /** @type {React.FormEventHandler<HTMLFormElement>} */
-  const handleSubmit = React.useCallback(
+  const handleSubmit = useCallback(
     (ev) => {
       ev.preventDefault();
       onResetError();

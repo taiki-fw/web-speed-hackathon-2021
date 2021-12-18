@@ -1,4 +1,3 @@
-import React from 'react';
 import { FontAwesomeIcon as FontAwesome } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 import {

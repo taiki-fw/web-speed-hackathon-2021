@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { TermPage } from '../../components/term/TermPage';
 import { useHeadTitle } from '../../hooks/useHeadTitle';
 

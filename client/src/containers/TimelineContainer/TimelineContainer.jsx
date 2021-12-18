@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { InfiniteScroll } from '../../components/foundation/InfiniteScroll';
 import { TimelinePage } from '../../components/timeline/TimelinePage';
 import { useHeadTitle } from '../../hooks/useHeadTitle';

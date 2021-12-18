@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import 'wicg-inert';
 
@@ -11,7 +11,7 @@ import 'wicg-inert';
 /** @type {React.VFC<Props>} */
 const Modal = ({ children, onRequestCloseModal }) => {
   // overflow: hidden を付与して、スクロールできないようにする
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.style.setProperty('overflow', 'hidden');
     return () => {
       document.body.style.removeProperty('overflow');
@@ -19,7 +19,7 @@ const Modal = ({ children, onRequestCloseModal }) => {
   }, []);
 
   // inert 属性を #app に付与して、アプリケーションが操作できないようにする
-  React.useEffect(() => {
+  useEffect(() => {
     document.getElementById('app').inert = true;
     return () => {
       document.getElementById('app').inert = false;
@@ -27,7 +27,7 @@ const Modal = ({ children, onRequestCloseModal }) => {
   }, []);
 
   // Escape キーを入力すると、モーダルを閉じる
-  React.useEffect(() => {
+  useEffect(() => {
     const handler = (ev) => {
       if (ev.key === 'Escape') {
         onRequestCloseModal();

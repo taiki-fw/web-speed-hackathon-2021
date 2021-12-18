@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 const LIMIT = 10;
 
@@ -18,15 +18,15 @@ const LIMIT = 10;
  * @returns {ReturnValues<T>}
  */
 export function useInfiniteFetch(apiPath, fetcher) {
-  const internalRef = React.useRef({ isLoading: false, offset: 0 });
+  const internalRef = useRef({ isLoading: false, offset: 0 });
 
-  const [result, setResult] = React.useState({
+  const [result, setResult] = useState({
     data: [],
     error: null,
     isLoading: true,
   });
 
-  const fetchMore = React.useCallback(() => {
+  const fetchMore = useCallback(() => {
     const { isLoading, offset } = internalRef.current;
     if (isLoading || offset % LIMIT !== 0) {
       return;
@@ -68,7 +68,7 @@ export function useInfiniteFetch(apiPath, fetcher) {
     });
   }, [apiPath, fetcher]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setResult(() => ({
       data: [],
       error: null,

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { NotFoundPage } from '../../components/application/NotFoundPage';
 import { useHeadTitle } from '../../hooks/useHeadTitle';
 

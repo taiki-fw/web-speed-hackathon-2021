@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo, useState, useCallback, useRef } from 'react';
 
 import { useFetch } from '../../../hooks/use_fetch';
 import { fetchBinary } from '../../../utils/fetchers';
@@ -18,21 +18,21 @@ import { SoundWaveSVG } from '../SoundWaveSVG';
 const SoundPlayer = ({ sound }) => {
   const { data, isLoading } = useFetch(getSoundPath(sound.id), fetchBinary);
 
-  const blobUrl = React.useMemo(() => {
+  const blobUrl = useMemo(() => {
     return data !== null ? URL.createObjectURL(new Blob([data])) : null;
   }, [data]);
 
-  const [currentTimeRatio, setCurrentTimeRatio] = React.useState(0);
+  const [currentTimeRatio, setCurrentTimeRatio] = useState(0);
   /** @type {React.ReactEventHandler<HTMLAudioElement>} */
-  const handleTimeUpdate = React.useCallback((ev) => {
+  const handleTimeUpdate = useCallback((ev) => {
     const el = ev.currentTarget;
     setCurrentTimeRatio(el.currentTime / el.duration);
   }, []);
 
   /** @type {React.RefObject<HTMLAudioElement>} */
-  const audioRef = React.useRef(null);
-  const [isPlaying, setIsPlaying] = React.useState(false);
-  const handleTogglePlaying = React.useCallback(() => {
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const handleTogglePlaying = useCallback(() => {
     setIsPlaying((isPlaying) => {
       if (isPlaying) {
         audioRef.current?.pause();
