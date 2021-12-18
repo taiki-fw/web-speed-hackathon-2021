@@ -3,6 +3,7 @@ const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 
 const SRC_PATH = path.resolve(__dirname, './src');
@@ -53,6 +54,7 @@ const config = {
     publicPath: '/',
   },
   optimization: {
+    minimizer: [new CssMinimizerPlugin()],
     splitChunks: {
       cacheGroups: {
         vendor: {
